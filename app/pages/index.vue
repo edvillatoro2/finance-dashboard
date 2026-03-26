@@ -25,7 +25,7 @@ import StatCard from "@/components/StatCard.vue";
 import { useTransactions } from "@/composables/useTransactions";
 
 const today = ref(new Date().toDateString());
-const { transactions } = useTransactions();
+const { transactions, income, expenses, balance } = useTransactions();
 </script>
 
 <style scoped></style>
