@@ -10,14 +10,9 @@
     </section>
     <section>
       <h2>Recent Transactions</h2>
-      <!-- <ul>
-        <li v-for="transaction in transactions" :key="transaction.id">
-          {{ transaction.text }} - {{ transaction.amount }}
-        </li>
-      </ul> -->
       <TransactionList
         :transactions="transactions"
-        @delete="deleteTransactions"
+        @delete="deleteTransaction"
       />
     </section>
   </div>
@@ -32,7 +27,7 @@ import TransactionList from "@/components/TransactionList.vue";
 const today = ref(new Date().toDateString());
 const { transactions } = useTransactions();
 
-const deleteTransactions = (id: number) => {
+const deleteTransaction = (id: number) => {
   transactions.value = transactions.value.filter((t) => t.id !== id);
 };
 </script>
