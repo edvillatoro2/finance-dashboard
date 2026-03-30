@@ -1,7 +1,13 @@
 <template>
   <div>
-    <h1>Finance Dashboard</h1>
-    <h1>Welcome today is, {{ today }}</h1>
+    <section>
+      <h1>Finance Dashboard</h1>
+      <h1>Welcome today is, {{ today }}</h1>
+      <div>
+        <NuxtLink to="/dashboard">Dashboard</NuxtLink>
+        <NuxtLink to="/transactions">Transactions</NuxtLink>
+      </div>
+    </section>
     <section>
       <StatCard title="Income" :value="5000" />
       <StatCard title="Expenses" :value="2000" />
