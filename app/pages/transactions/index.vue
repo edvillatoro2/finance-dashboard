@@ -38,7 +38,12 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  middleware: "auth",
+});
+
 import { ref } from "vue";
+import { definePage } from "vue-router/dist/experimental/index.js";
 
 const text = ref("");
 const amount = ref(0);

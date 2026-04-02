@@ -3,6 +3,16 @@
     <section>
       <h1>Finance Dashboard</h1>
       <h1>Welcome today is, {{ today }}</h1>
+      <button @click="login" class="bg-green-500 text-white px-4 py-2 rounded">
+        Login
+      </button>
+      <button @click="logout" class="bg-red-500 text-white px-4 py-2 rounded">
+        Logout
+      </button>
+
+      <NuxtLink to="/transactions" class="block mt-4 text-blue-500">
+        Go to Transactions
+      </NuxtLink>
       <div>
         <NuxtLink to="/dashboard">Dashboard</NuxtLink>
         <NuxtLink to="/transactions">Transactions</NuxtLink>
@@ -30,9 +40,17 @@ import StatCard from "@/components/StatCard.vue";
 import { useTransactions } from "@/composables/useTransactions";
 import TransactionList from "@/components/TransactionList.vue";
 
+const auth = useState("auth", () => false);
 const today = ref(new Date().toDateString());
 const { transactions } = useTransactions();
 
+const login = () => {
+  auth.value = true;
+  navigateTo("/transactions");
+};
+const logout = () => {
+  auth.value = false;
+};
 const deleteTransaction = (id: number) => {
   transactions.value = transactions.value.filter((t) => t.id !== id);
 };
