@@ -43,6 +43,7 @@ import TransactionList from "@/components/TransactionList.vue";
 const auth = useState("auth", () => false);
 const today = ref(new Date().toDateString());
 const { transactions } = useTransactions();
+console.log("auth state:", auth.value);
 
 const login = () => {
   auth.value = true;
