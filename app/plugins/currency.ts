@@ -5,7 +5,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         const formatted = new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
-        }).format(value);
+        }).format(Math.abs(value));
         return value < 0 ? `-${formatted}` : formatted;
       },
     },
