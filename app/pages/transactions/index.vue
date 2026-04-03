@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="p-4 flex flex-col gap-6 justify-center items-center">
     <h1>Transactions</h1>
     <span v-if="errorMessage" class="text-red-500">
       {{ errorMessage }}
@@ -7,33 +7,39 @@
     <span v-if="successMessage" class="text-green-500">
       {{ successMessage }}
     </span>
-    <form action="" @submit.prevent="addTransaction" class="space-y-3 max-w-md">
-      <input
-        v-model="text"
-        placeholder="Transaction text"
-        required
-        type="text"
-        class="w-full border p-2 rounded"
-      />
-      <input
-        v-model.number="amount"
-        placeholder="Amount"
-        required
-        type="number"
-        class="w-full border p-2 rounded"
-      />
-      <button
-        type="submit"
-        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+    <div>
+      <form
+        action=""
+        @submit.prevent="addTransaction"
+        class="space-y-3 max-w-md"
       >
-        Add transaction
-      </button>
-    </form>
-    <ul>
-      <li v-for="transaction in transactions" :key="transaction.id">
-        {{ transaction.text }} - {{ transaction.amount }}
-      </li>
-    </ul>
+        <input
+          v-model="text"
+          placeholder="Transaction text"
+          required
+          type="text"
+          class="w-full border p-2 rounded"
+        />
+        <input
+          v-model.number="amount"
+          placeholder="Amount"
+          required
+          type="number"
+          class="w-full border p-2 rounded"
+        />
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Add transaction
+        </button>
+      </form>
+      <ul>
+        <li v-for="transaction in transactions" :key="transaction.id">
+          {{ transaction.text }} - {{ $currency(transaction.amount) }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -49,6 +55,7 @@ const text = ref("");
 const amount = ref(0);
 const errorMessage = ref("");
 const successMessage = ref("");
+const { $currency } = useNuxtApp();
 
 //fetch existing transactions
 const { data: transactions, refresh } = await useFetch("/api/transactions");
