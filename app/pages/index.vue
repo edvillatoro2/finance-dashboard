@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="flex flex-col justify-center items-center">
     <section>
       <h1>Finance Dashboard</h1>
       <h1>Welcome today is, {{ today }}</h1>
@@ -18,19 +18,21 @@
         <NuxtLink to="/transactions">Transactions</NuxtLink>
       </div>
     </section>
-    <section>
-      <StatCard title="Income" :value="5000" />
-      <StatCard title="Expenses" :value="2000" />
-      <StatCard title="Balance" :value="3000" />
-      <StatCard title="Savings" :value="150" />
-    </section>
-    <section>
-      <h2>Recent Transactions</h2>
-      <TransactionList
-        :transactions="transactions"
-        @delete="deleteTransaction"
-      />
-    </section>
+    <div>
+      <section>
+        <StatCard title="Income" :value="5000" />
+        <StatCard title="Expenses" :value="2000" />
+        <StatCard title="Balance" :value="3000" />
+        <StatCard title="Savings" :value="150" />
+      </section>
+      <section>
+        <h2>Recent Transactions</h2>
+        <TransactionList
+          :transactions="transactions"
+          @delete="deleteTransaction"
+        />
+      </section>
+    </div>
   </div>
 </template>
 
