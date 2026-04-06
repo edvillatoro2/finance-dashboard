@@ -15,7 +15,7 @@ export const useTransactions = () => {
     transactions.value.push(newTransaction);
   };
 
-  const deleteTransaction = async (id: number) => {
+  const deleteTransaction = (id: number) => {
     transactions.value = transactions.value.filter((t) => t.id !== id);
   };
   return {

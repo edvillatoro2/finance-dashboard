@@ -28,20 +28,15 @@
         <button
           type="submit"
           class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          :disabled="loadingSubmit"
         >
-          Add transaction
+          {{ loadingSubmit ? "Adding..." : "Add Transaction" }}
         </button>
       </form>
-      <ul>
-        <li v-for="transaction in transactions" :key="transaction.id">
-          {{ transaction.text }}
-          <span
-            :class="transaction.amount < 0 ? 'text-red-500' : 'text-green-500'"
-          >
-            {{ $currency(transaction.amount) }}
-          </span>
-        </li>
-      </ul>
+      <TransactionList
+        :transactions="transactions"
+        @delete="deleteTransaction"
+      />
     </div>
   </div>
 </template>
@@ -60,22 +55,43 @@ const successMessage = ref("");
 const { $currency, $formatDate } = useNuxtApp();
 
 //fetch existing transactions
-const { transactions, fetchTransactions, addTransaction } = useTransactions();
+const { transactions, fetchTransactions, addTransaction, deleteTransaction } =
+  useTransactions();
 
 onMounted(() => {
   fetchTransactions();
 });
 
-const handleSubmit = async () => {
-  if (!text.value.trim()) return;
-  if (amount.value === 0) return;
+const loadingSubmit = ref(false);
 
-  await addTransaction({
-    text: text.value,
-    amount: amount.value,
-  });
-  text.value = "";
-  amount.value = 0;
+const handleSubmit = async () => {
+  errorMessage.value = "";
+  successMessage.value = "";
+
+  if (!text.value.trim()) {
+    errorMessage.value = "Transaction text is required.";
+    return;
+  }
+  if (amount.value === 0) {
+    errorMessage.value = "Amount cannot be 0";
+    return;
+  }
+
+  loadingSubmit.value = true;
+
+  try {
+    await addTransaction({
+      text: text.value,
+      amount: amount.value,
+    });
+    successMessage.value = "Transaction added successfully!";
+    text.value = "";
+    amount.value = 0;
+  } catch (error) {
+    errorMessage.value = "Failed to add transaction.";
+  }
+
+  loadingSubmit.value = false;
 };
 </script>
 
