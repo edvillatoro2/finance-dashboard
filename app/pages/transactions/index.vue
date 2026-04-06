@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-4 flex flex-col gap-6 justify-center items-center bg-white shadow rounded p-4"
+    class="p-4 flex flex-col gap-6 justify-center items-center bg-white shadow rounded"
   >
     <h1 class="text-xl font-semibold mb-4">Transactions</h1>
     <span v-if="errorMessage" class="text-red-500">
@@ -9,7 +9,7 @@
     <span v-if="successMessage" class="text-green-500">
       {{ successMessage }}
     </span>
-    <div>
+    <div class="w-full max-w-md">
       <form action="" @submit.prevent="handleSubmit" class="space-y-3 max-w-md">
         <input
           v-model="text"
@@ -52,7 +52,6 @@ const text = ref("");
 const amount = ref(0);
 const errorMessage = ref("");
 const successMessage = ref("");
-const { $currency, $formatDate } = useNuxtApp();
 
 //fetch existing transactions
 const { transactions, fetchTransactions, addTransaction, deleteTransaction } =
