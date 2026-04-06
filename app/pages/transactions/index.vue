@@ -10,11 +10,7 @@
       {{ successMessage }}
     </span>
     <div>
-      <form
-        action=""
-        @submit.prevent="addTransaction"
-        class="space-y-3 max-w-md"
-      >
+      <form action="" @submit.prevent="handleSubmit" class="space-y-3 max-w-md">
         <input
           v-model="text"
           placeholder="Transaction text"
@@ -56,7 +52,6 @@ definePageMeta({
 });
 
 import { ref } from "vue";
-import { definePage } from "vue-router/dist/experimental/index.js";
 
 const text = ref("");
 const amount = ref(0);
@@ -65,34 +60,20 @@ const successMessage = ref("");
 const { $currency, $formatDate } = useNuxtApp();
 
 //fetch existing transactions
-const { data: transactions, refresh } = await useFetch("/api/transactions");
+const { transactions, fetchTransactions, addTransaction } = useTransactions();
 
-//post new transaction
-const addTransaction = async () => {
-  errorMessage.value = "";
-  successMessage.value = "";
+onMounted(() => {
+  fetchTransactions();
+});
 
-  //error message handling
-  if (!text.value.trim()) {
-    errorMessage.value = "Description Required";
-    return;
-  }
-  if (amount.value === 0) {
-    errorMessage.value = "Amount cannot be 0";
-    return;
-  }
+const handleSubmit = async () => {
+  if (!text.value.trim()) return;
+  if (amount.value === 0) return;
 
-  await $fetch("/api/transactions", {
-    method: "POST",
-    body: { text: text.value, amount: amount.value },
+  await addTransaction({
+    text: text.value,
+    amount: amount.value,
   });
-
-  //refresh transaction list from GET API
-  await refresh();
-
-  successMessage.value = "Transaction added successfully";
-
-  //reset form
   text.value = "";
   amount.value = 0;
 };

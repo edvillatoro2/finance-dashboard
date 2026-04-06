@@ -1,40 +1,27 @@
-export function useTransactions() {
-  const transactions = ref([
-    {
-      id: 1,
-      text: "Salary",
-      amount: 3000,
-    },
-    {
-      id: 2,
-      text: "Groceries",
-      amount: -50,
-    },
-    {
-      id: 3,
-      text: "Coffee",
-      amount: -5,
-    },
-  ]);
+export const useTransactions = () => {
+  const transactions = useState<any[]>("transactions", () => []);
 
-  const income = computed(() =>
-    transactions.value
-      .filter((t) => t.amount > 0)
-      .reduce((sum, t) => sum + t.amount, 0),
-  );
+  const fetchTransactions = async () => {
+    const { data } = await useFetch("/api/transactions");
+    transactions.value = data.value || [];
+  };
 
-  const expenses = computed(() =>
-    transactions.value
-      .filter((t) => t.amount < 0)
-      .reduce((sum, t) => sum + t.amount, 0),
-  );
+  const addTransaction = async (payload: { text: string; amount: number }) => {
+    const newTransaction = await $fetch("/api/transactions", {
+      method: "POST",
+      body: payload,
+    });
+    // update local state
+    transactions.value.push(newTransaction);
+  };
 
-  const balance = computed(() => income.value + expenses.value);
-
+  const deleteTransaction = async (id: number) => {
+    transactions.value = transactions.value.filter((t) => t.id !== id);
+  };
   return {
     transactions,
-    income,
-    expenses,
-    balance,
+    fetchTransactions,
+    addTransaction,
+    deleteTransaction,
   };
-}
+};
