@@ -1,61 +1,99 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
-    <section>
-      <h1>Finance Dashboard</h1>
-      <h1>Welcome today is, {{ today }}</h1>
-      <button @click="login" class="bg-green-500 text-white px-4 py-2 rounded">
-        Login
-      </button>
-      <button @click="logout" class="bg-red-500 text-white px-4 py-2 rounded">
-        Logout
-      </button>
-
-      <NuxtLink to="/transactions" class="block mt-4 text-blue-500">
-        Go to Transactions
-      </NuxtLink>
-      <div>
-        <NuxtLink to="/dashboard">Dashboard</NuxtLink>
-        <NuxtLink to="/transactions">Transactions</NuxtLink>
+  <div
+    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 flex items-center justify-center p-6"
+  >
+    <!-- Glass Card Container -->
+    <div
+      class="w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
+    >
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6 text-white">
+        <div>
+          <h1 class="text-xl font-semibold">My Card</h1>
+          <p class="text-sm opacity-70">{{ today }}</p>
+        </div>
+        <div class="flex gap-2">
+          <button
+            @click="login"
+            class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition"
+          >
+            Login
+          </button>
+          <button
+            @click="logout"
+            class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition"
+          >
+            Logout
+          </button>
+        </div>
       </div>
-    </section>
-    <div>
-      <section>
-        <StatCard title="Income" :value="5000" />
-        <StatCard title="Expenses" :value="2000" />
-        <StatCard title="Balance" :value="3000" />
-        <StatCard title="Savings" :value="150" />
-      </section>
-      <section>
-        <h2>Recent Transactions</h2>
+      <!-- Credit Card UI -->
+      <div
+        class="rounded-2xl p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg mb-6"
+      >
+        <p class="text-sm opacity-80">Balance</p>
+        <h2 class="text-3xl font-bold">{{ $currency(total) }}</h2>
+        <div class="mt-6 flex justify-between text-sm opacity-80">
+          <span>**** 1234</span> <span>12/28</span>
+        </div>
+      </div>
+      <!-- Actions -->
+      <div class="grid grid-cols-3 gap-3 mb-6">
+        <NuxtLink
+          to="/dashboard"
+          class="bg-white/20 p-3 rounded-xl text-white text-center hover:bg-white/30 transition"
+        >
+          Dashboard
+        </NuxtLink>
+        <NuxtLink
+          to="/transactions"
+          class="bg-white/20 p-3 rounded-xl text-white text-center hover:bg-white/30 transition"
+        >
+          Transactions
+        </NuxtLink>
+        <button
+          class="bg-white/20 p-3 rounded-xl text-white hover:bg-white/30 transition"
+        >
+          Settings
+        </button>
+      </div>
+      <!-- Transactions Section -->
+      <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg">
+        <div class="flex justify-between items-center mb-4 text-white">
+          <h2 class="font-semibold">Recent Transactions</h2>
+          <NuxtLink to="/transactions" class="text-sm opacity-70">
+            View all
+          </NuxtLink>
+        </div>
         <TransactionList
           :transactions="transactions"
           @delete="deleteTransaction"
         />
-      </section>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import StatCard from "@/components/StatCard.vue";
+import { ref, computed } from "vue";
 import { useTransactions } from "@/composables/useTransactions";
 import TransactionList from "@/components/TransactionList.vue";
 
 const auth = useState("auth", () => false);
 const today = ref(new Date().toDateString());
-const { transactions } = useTransactions();
-console.log("auth state:", auth.value);
+const { transactions, deleteTransaction } = useTransactions();
+const { $currency } = useNuxtApp();
+
+const total = computed(() => {
+  return transactions.value.reduce((sum, t) => sum + t.amount, 0);
+});
 
 const login = () => {
   auth.value = true;
-  navigateTo("/transactions");
+  navigateTo("/dashboard");
 };
 const logout = () => {
   auth.value = false;
-};
-const deleteTransaction = (id: number) => {
-  transactions.value = transactions.value.filter((t) => t.id !== id);
 };
 </script>
 

@@ -5,9 +5,9 @@
         class="flex justify-between items-center p-3 border rounded hover:bg-gray-50"
       >
         <div class="flex flex-col">
-          <span class="font-medium">{{ transaction.text }}</span>
+          <span class="font-medium text-white">{{ transaction.text }}</span>
           <span
-            :class="transaction.amount < 0 ? 'text-red-500' : 'text-green-500'"
+            :class="transaction.amount < 0 ? 'text-red-400' : 'text-green-400'"
           >
             {{ $currency(transaction.amount) }}
           </span>
