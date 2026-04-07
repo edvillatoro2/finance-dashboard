@@ -6,7 +6,10 @@
       :transaction="transaction"
       @delete="emit('delete', $event)"
     />
-    <div v-if="!transactions.length" class="text-center mt-4 text-gray-500">
+    <div
+      v-if="!transactions.length"
+      class="font-semibold text-md text-center mt-4 text-red-500"
+    >
       No transactions found.
     </div>
   </div>
