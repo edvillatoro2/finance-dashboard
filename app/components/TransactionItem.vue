@@ -9,7 +9,7 @@
       </span>
       <button
         @click="emit('delete', transaction.id)"
-        class="text-sm text-red-500 hover:text-red-700"
+        class="text-red-500 bg-red-500/60 rounded transition-all duration-200 hover:text-red-700 hover:scale-110 active:scale-90"
       >
         Delete
       </button>
@@ -24,7 +24,7 @@ defineProps<{
 }>();
 
 // component can emit an event called 'delete',
-// must include a number (id),
+// must include a number type (id),
 // and return nothing
 const emit = defineEmits<{
   (e: "delete", id: number): void;

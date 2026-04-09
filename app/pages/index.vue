@@ -1,11 +1,14 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-200 to-blue-500 flex items-center justify-center p-6"
+    class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white flex justify-center items-center p-6"
   >
     <!-- Glass Card Container -->
     <div
-      class="w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
+      class="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.025] w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
     >
+      <div
+        class="absolute z-0 inset-0 rounded-2xl opacity-0 hover:opacity-100 transition duration-300 bg-gradient-to-r from-green-400/10 via-blue-400/10 to-purple-400/10 blur-xl"
+      />
       <!-- Header -->
       <div class="flex justify-between items-center mb-6 text-white">
         <div>
@@ -15,13 +18,13 @@
         <div class="flex gap-2">
           <button
             @click="login"
-            class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition"
+            class="bg-white/20 z-10 px-4 py-2 rounded-lg hover:bg-white/30 transition"
           >
             Login
           </button>
           <button
             @click="logout"
-            class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition"
+            class="bg-white/20 z-10 px-4 py-2 rounded-lg hover:bg-white/30 transition"
           >
             Logout
           </button>
@@ -41,18 +44,18 @@
       <div class="grid grid-cols-3 gap-3 mb-6">
         <NuxtLink
           to="/dashboard"
-          class="bg-white/20 p-3 rounded-xl text-white text-center hover:bg-white/30 transition"
+          class="bg-white/20 z-10 p-3 rounded-xl text-white text-center hover:bg-white/30 transition"
         >
           Dashboard
         </NuxtLink>
         <NuxtLink
           to="/transactions"
-          class="bg-white/20 p-3 rounded-xl text-white text-center hover:bg-white/30 transition"
+          class="bg-white/20 z-10 p-3 rounded-xl text-white text-center hover:bg-white/30 transition"
         >
           Transactions
         </NuxtLink>
         <button
-          class="bg-white/20 p-3 rounded-xl text-white hover:bg-white/30 transition"
+          class="bg-white/20 z-10 p-3 rounded-xl text-white hover:bg-white/30 transition"
         >
           Settings
         </button>
