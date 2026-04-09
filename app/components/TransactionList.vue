@@ -7,7 +7,7 @@
       @delete="emit('delete', $event)"
     />
     <div
-      v-if="!transactions.length"
+      v-if="!transactions?.length"
       class="font-semibold text-md text-center mt-4 text-red-500"
     >
       No transactions found.
