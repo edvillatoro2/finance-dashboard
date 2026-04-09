@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col gap-2 max-w-md">
+  <div class="w-full flex flex-col gap-2">
     <TransactionItem
       v-for="transaction in transactions"
       :key="transaction.id"

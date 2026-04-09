@@ -57,6 +57,13 @@
           Settings
         </button>
       </div>
+      <div>
+        <div class="flex">
+          <TransactionDonut :transactions="transactions" />
+          <TransactionChart :transactions="transactions" />
+        </div>
+      </div>
+
       <!-- Transactions Section -->
       <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg">
         <div class="flex justify-between items-center mb-4 text-white">
@@ -69,7 +76,6 @@
           :transactions="transactions"
           @delete="deleteTransaction"
         />
-        <TransactionChart :transactions="transactions" />
       </div>
     </div>
   </div>
@@ -80,11 +86,15 @@ import { ref, computed } from "vue";
 import { useTransactions } from "@/composables/useTransactions";
 import TransactionList from "@/components/TransactionList.vue";
 import TransactionChart from "@/components/TransactionChart.vue";
+import TransactionDonut from "@/components/TransactionDonut.vue";
 
 const auth = useState("auth", () => false);
 const today = ref(new Date().toDateString());
-const { transactions, deleteTransaction } = useTransactions();
+const { transactions, deleteTransaction, fetchTransactions } =
+  useTransactions();
 const { $currency } = useNuxtApp();
+
+await useAsyncData("transactions", fetchTransactions);
 
 const total = computed(() => {
   return transactions.value.reduce((sum, t) => sum + t.amount, 0);
