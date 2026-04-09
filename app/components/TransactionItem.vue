@@ -23,7 +23,12 @@ defineProps<{
   transaction: Transaction;
 }>();
 
-const emit = defineEmits(["delete"]);
+// component can emit an event called 'delete',
+// must include a number (id),
+// and return nothing
+const emit = defineEmits<{
+  (e: "delete", id: number): void;
+}>();
 const { $currency } = useNuxtApp();
 </script>
 
