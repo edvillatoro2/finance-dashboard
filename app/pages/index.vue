@@ -69,6 +69,7 @@
           :transactions="transactions"
           @delete="deleteTransaction"
         />
+        <TransactionChart :transactions="transactions" />
       </div>
     </div>
   </div>
@@ -78,6 +79,7 @@
 import { ref, computed } from "vue";
 import { useTransactions } from "@/composables/useTransactions";
 import TransactionList from "@/components/TransactionList.vue";
+import TransactionChart from "@/components/TransactionChart.vue";
 
 const auth = useState("auth", () => false);
 const today = ref(new Date().toDateString());
