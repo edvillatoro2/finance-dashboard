@@ -57,11 +57,10 @@
           Settings
         </button>
       </div>
-      <div>
-        <div class="flex">
-          <TransactionDonut :transactions="transactions" />
-          <TransactionChart :transactions="transactions" />
-        </div>
+      <!-- charts -->
+      <div class="flex gap-4 mb-6">
+        <TransactionDonut class="w-1/3" :transactions="transactions" />
+        <TransactionChart class="w-2/3" :transactions="transactions" />
       </div>
 
       <!-- Transactions Section -->

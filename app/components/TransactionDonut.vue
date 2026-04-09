@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4"
+    class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 w-full"
   >
     <DonutChart
       :data="chartData"
