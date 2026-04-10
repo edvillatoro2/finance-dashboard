@@ -9,7 +9,7 @@
       </span>
       <button
         @click="emit('delete', transaction.id)"
-        class="text-red-500 font-semibold bg-gradient-to-r from-red-200 to-purple-100 shadow-lg rounded transition-all duration-600 hover:text-red-700 hover:scale-105 active:scale-90"
+        class="text-red-500 font-semibold bg-gradient-to-r from-red-200 to-purple-100 shadow-lg rounded transition-all duration-900 hover:text-red-700 hover:scale-105 active:scale-90"
       >
         Delete
       </button>

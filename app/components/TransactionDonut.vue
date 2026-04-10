@@ -7,6 +7,7 @@
       :categories="categories"
       :height="220"
       :radius="80"
+      :hide-legend="true"
       :pad-angle="0.1"
       :arc-width="20"
     >
