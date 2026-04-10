@@ -1,6 +1,6 @@
 <template>
   <li
-    class="flex justify-between items-center p-3 border rounded hover:bg-gray-50"
+    class="flex justify-between items-center p-3 border rounded hover:bg-gray-200/20 transition-colors duration-200 cursor-pointer"
   >
     <div class="flex flex-col">
       <span class="font-medium text-white">{{ transaction.text }}</span>
@@ -9,7 +9,7 @@
       </span>
       <button
         @click="emit('delete', transaction.id)"
-        class="text-red-500 bg-red-500/60 rounded transition-all duration-200 hover:text-red-700 hover:scale-110 active:scale-90"
+        class="text-red-500 font-semibold bg-gradient-to-r from-red-200 to-purple-100 shadow-lg rounded transition-all duration-600 hover:text-red-700 hover:scale-105 active:scale-90"
       >
         Delete
       </button>

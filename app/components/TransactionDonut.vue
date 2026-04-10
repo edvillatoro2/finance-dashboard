@@ -6,20 +6,39 @@
       :data="chartData"
       :categories="categories"
       :height="220"
-      :radius="60"
+      :radius="80"
       :pad-angle="0.1"
       :arc-width="20"
     >
+      <template #tooltip="{ values }">
+        <div class="flex items-center gap-2 p-2">
+          <div
+            class="size-3 rounded-full"
+            :style="{ backgroundColor: categories[values?.label]?.color }"
+          />
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold">{{ values?.label }}</span>
+            <span class="text-sm">{{
+              values?.label ? $currency(values[values.label]) : ""
+            }}</span>
+          </div>
+        </div>
+      </template>
       <div class="text-center text-white">
-        <div class="font-semibold">{{ $currency(total) }}</div>
-        <div class="text-sm opacity-60">Net Balance</div>
+        <div class="font-bold text-lg">{{ $currency(total) }}</div>
+        <div class="text-xs opacity-60 mb-2">Net Balance</div>
+        <div class="text-xs">
+          <span class="text-green-400">↑ {{ $currency(income) }}</span>
+          &nbsp;&nbsp;
+          <span class="text-red-400">↓ {{ $currency(expense) }}</span>
+        </div>
       </div>
     </DonutChart>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import type { Transaction } from "~/types/transaction";
 
 const props = defineProps<{
@@ -42,9 +61,13 @@ const expense = computed(() =>
 
 const total = computed(() => income.value - expense.value);
 
-const chartData = computed(() => [income.value, expense.value]);
+const chartData = ref<number[]>([0, 0]);
 
-const categories = {
+watchEffect(() => {
+  chartData.value = [income.value, expense.value];
+});
+
+const categories: Record<string, { name: string; color: string }> = {
   income: {
     name: "Income",
     color: "#22c55e",

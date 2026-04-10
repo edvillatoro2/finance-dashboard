@@ -4,7 +4,7 @@
   >
     <!-- Glass Card Container -->
     <div
-      class="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.025] w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
+      class="relative bg-gradient-to-br from-black/80 to-white/5 backdrop-blur-xl rounded-2xl p-6 shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.025] w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
     >
       <div
         class="absolute z-0 inset-0 rounded-2xl opacity-0 hover:opacity-100 transition duration-300 bg-gradient-to-r from-green-400/10 via-blue-400/10 to-purple-400/10 blur-xl"
@@ -67,7 +67,7 @@
       </div>
 
       <!-- Transactions Section -->
-      <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg">
+      <div class="bg-white/10 z-10 rounded-2xl p-4 backdrop-blur-lg">
         <div class="flex justify-between items-center mb-4 text-white">
           <h2 class="font-semibold">Recent Transactions</h2>
           <NuxtLink to="/transactions" class="text-sm opacity-70">
@@ -96,7 +96,10 @@ const { transactions, deleteTransaction, fetchTransactions } =
   useTransactions();
 const { $currency } = useNuxtApp();
 
-await useAsyncData("transactions", fetchTransactions);
+await useAsyncData("transactions", async () => {
+  await fetchTransactions();
+  return true;
+});
 
 const total = computed(() => {
   return transactions.value.reduce((sum, t) => sum + t.amount, 0);
