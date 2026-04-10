@@ -5,8 +5,6 @@
       :categories="categories"
       :height="300"
       xKey="date"
-      xLabel="Transactions"
-      yLabel="Amount"
       :curve-type="CurveType.MonotoneX"
       :stacked="true"
     />

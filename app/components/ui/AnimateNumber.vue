@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from "vue";
+import { ref, watch, computed, onMounted } from "vue";
 
 const props = defineProps<{
   value: number;
@@ -19,6 +19,12 @@ const duration = props.duration ?? 900;
 watch(
   () => props.value,
   (newValue) => {
+    // only run in browser
+    if (typeof window === "undefined") {
+      displayValue.value = newValue;
+      return;
+    }
+
     const start = displayValue.value;
     const startTime = performance.now();
 

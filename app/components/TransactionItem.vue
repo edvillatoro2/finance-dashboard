@@ -5,11 +5,11 @@
     <div class="flex flex-col">
       <span class="font-medium text-white">{{ transaction.text }}</span>
       <span :class="transaction.amount < 0 ? 'text-red-400' : 'text-green-400'">
-        {{ $currency(transaction.amount) }}
+        <AnimatedNumber :value="transaction.amount" />
       </span>
       <button
         @click="emit('delete', transaction.id)"
-        class="text-red-500 font-semibold bg-gradient-to-r from-red-200 to-purple-100 shadow-lg rounded transition-all duration-900 hover:text-red-700 hover:scale-105 active:scale-90"
+        class="mt-2 px-3 py-1.5 text-white text-sm rounded-lg bg-red-500/30 border border-red-500/80 hover:bg-red-600/40 hover:text-red-200 transition-colors duration-200"
       >
         Delete
       </button>
@@ -18,6 +18,7 @@
 </template>
 <script setup lang="ts">
 import type { Transaction } from "~/types/transaction";
+import AnimatedNumber from "@/components/ui/AnimateNumber.vue";
 
 defineProps<{
   transaction: Transaction;
