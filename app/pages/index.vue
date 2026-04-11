@@ -4,7 +4,7 @@
   >
     <!-- Glass Card Container -->
     <div
-      class="group relative w-full max-w-7xl rounded-3xl p-4 sm:p-6 bg-white/10 backdrop-blur-xl shadow-4xl border border-white/20 transition-all duration-1000 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.025]"
+      class="group relative w-full max-w-7xl rounded-3xl p-4 sm:p-6 bg-white/10 backdrop-blur-xl shadow-6xl border border-white/20 transition-all duration-1000 hover:shadow-2xl hover:-translate-y-1 hover:scale-[1.025]"
     >
       <!-- Glow -->
       <div
@@ -41,7 +41,7 @@
 
         <!-- Credit Card UI -->
         <div
-          class="rounded-2xl p-4 sm:p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg mb-6 transition-all duration-1000 hover:bg-gradient-to-l hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 hover:shadow-2xl"
+          class="rounded-2xl p-4 sm:p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg mb-6 transition-all duration-1000 hover:bg-gradient-to-l hover:from-indigo-500 hover:via-purple-500 hover:to-pink-600 hover:shadow-2xl"
         >
           <p class="text-sm opacity-80">Balance</p>
           <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
