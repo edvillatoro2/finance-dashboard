@@ -1,5 +1,12 @@
 export default defineEventHandler(async (event) => {
-  const id = getRouterParams(event).id;
-  // simulate deletion
-  return { success: true, id };
+  const { user } = await requireUserSession(event);
+  const id = Number(getRouterParam(event, "id"));
+
+  const transaction = await prisma.transaction.findUnique({ where: { id } });
+
+  if (!transaction || transaction.userId !== user.id) {
+    throw createError({ statusCode: 403, message: "Forbidden" });
+  }
+
+  return prisma.transaction.delete({ where: { id } });
 });
