@@ -131,6 +131,7 @@ const today = ref(new Date().toDateString());
 const { transactions, deleteTransaction, fetchTransactions } =
   useTransactions();
 const { $currency } = useNuxtApp();
+const { clear } = useUserSession();
 
 await useAsyncData("transactions", async () => {
   await fetchTransactions();
@@ -145,8 +146,10 @@ const login = () => {
   auth.value = true;
   navigateTo("/login");
 };
-const logout = () => {
-  auth.value = false;
+const logout = async () => {
+  await $fetch("/api/auth/logout", { method: "POST" });
+  await clear();
+  navigateTo("/login");
 };
 </script>
 
