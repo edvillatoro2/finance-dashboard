@@ -124,6 +124,8 @@ import TransactionChart from "@/components/TransactionChart.vue";
 import TransactionDonut from "@/components/TransactionDonut.vue";
 import AnimatedNumber from "@/components/ui/AnimateNumber.vue";
 
+definePageMeta({ middleware: "auth" });
+
 const auth = useState("auth", () => false);
 const today = ref(new Date().toDateString());
 const { transactions, deleteTransaction, fetchTransactions } =
