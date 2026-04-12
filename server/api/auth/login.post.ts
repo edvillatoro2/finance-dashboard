@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const { email, password } = await readBody(event);
 
   if (!email || !password) {

@@ -1,4 +1,4 @@
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const { user } = await requireUserSession(event);
   const { text, amount } = await readBody(event);
 
