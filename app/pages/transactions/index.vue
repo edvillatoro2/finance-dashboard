@@ -1,47 +1,62 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center bg-gray-100 p-6">
-    <div class="max-w-4xl mx-auto space-y-6">
+  <div
+    class="min-h-screen bg-gradient-to-br from-blue-600 via-pink-200 to-purple-500 flex items-center justify-center p-6"
+  >
+    <div
+      class="w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
+    >
       <!-- Header -->
-      <h1 class="text-2xl font-bold">Finance Dashboard</h1>
+      <div class="flex justify-between items-center mb-6 text-white">
+        <div>
+          <h1 class="text-xl font-semibold">Transactions</h1>
+          <p class="text-sm opacity-70">Manage your income & expenses</p>
+        </div>
+        <NuxtLink
+          to="/"
+          class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition text-white text-sm"
+        >
+          ← Back
+        </NuxtLink>
+      </div>
 
-      <!-- Form Card -->
-      <div class="bg-white p-4 rounded shadow">
-        <h2 class="text-lg font-semibold mb-3">Add Transaction</h2>
+      <!-- Add Transaction Form -->
+      <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg mb-6">
+        <h2 class="text-white font-semibold mb-4">Add Transaction</h2>
 
-        <form @submit.prevent="handleSubmit" class="space-y-3">
+        <form @submit.prevent="handleSubmit" class="flex flex-col gap-3">
           <input
             v-model="text"
-            placeholder="Transaction text"
+            placeholder="Description (e.g. Salary, Coffee)"
             type="text"
-            class="w-full border p-2 rounded"
+            class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/50"
           />
           <input
             v-model.number="amount"
-            placeholder="Amount"
+            placeholder="Amount (negative for expense, e.g. -50)"
             type="number"
-            class="w-full border p-2 rounded"
+            class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/50"
           />
 
+          <p v-if="errorMessage" class="text-red-300 text-sm">
+            {{ errorMessage }}
+          </p>
+          <p v-if="successMessage" class="text-green-300 text-sm">
+            {{ successMessage }}
+          </p>
+
           <button
+            type="submit"
             :disabled="loadingSubmit"
-            class="bg-blue-500 text-white px-4 py-2 rounded disabled:opacity-50"
+            class="w-full py-3 rounded-xl bg-white/30 text-white font-semibold hover:bg-white/40 transition disabled:opacity-50"
           >
-            {{ loadingSubmit ? "Adding..." : "Add transaction" }}
+            {{ loadingSubmit ? "Adding..." : "Add Transaction" }}
           </button>
         </form>
-
-        <p v-if="errorMessage" class="text-red-500 mt-2">
-          {{ errorMessage }}
-        </p>
-        <p v-if="successMessage" class="text-green-500 mt-2">
-          {{ successMessage }}
-        </p>
       </div>
 
-      <!-- Transactions Card -->
-      <div class="bg-white p-4 rounded shadow">
-        <h2 class="text-lg font-semibold mb-3">Transactions</h2>
-
+      <!-- Transactions List -->
+      <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg">
+        <h2 class="font-semibold text-white mb-4">All Transactions</h2>
         <TransactionList :transactions="transactions" @delete="handleDelete" />
       </div>
     </div>
@@ -59,14 +74,13 @@ const text = ref("");
 const amount = ref(0);
 const errorMessage = ref("");
 const successMessage = ref("");
-const { $currency } = useNuxtApp();
 
 //fetch existing transactions
 const { transactions, fetchTransactions, addTransaction, deleteTransaction } =
   useTransactions();
 
-onMounted(() => {
-  fetchTransactions();
+onMounted(async () => {
+  await fetchTransactions();
 });
 
 const loadingSubmit = ref(false);

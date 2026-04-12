@@ -5,7 +5,7 @@
     <div class="flex flex-col">
       <span class="font-medium text-white">{{ transaction.text }}</span>
       <span :class="transaction.amount < 0 ? 'text-red-400' : 'text-green-400'">
-        <AnimatedNumber :value="transaction.amount" />
+        {{ $currency(transaction.amount) }}
       </span>
       <button
         @click="emit('delete', transaction.id)"
@@ -18,7 +18,6 @@
 </template>
 <script setup lang="ts">
 import type { Transaction } from "~/types/transaction";
-import AnimatedNumber from "@/components/ui/AnimateNumber.vue";
 
 defineProps<{
   transaction: Transaction;

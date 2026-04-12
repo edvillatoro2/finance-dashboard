@@ -10,14 +10,12 @@ export const useTransactions = () => {
 
   const addTransaction = async (payload: { text: string; amount: number }) => {
     try {
+      const category = payload.amount > 0 ? "income" : "expense";
       const newTransaction = await $fetch<Transaction>("/api/transactions", {
         method: "POST",
-        body: payload,
+        body: { text: payload.text, amount: payload.amount, category },
       });
-
-      console.log("NEW:", newTransaction);
-
-      transactions.value.push(newTransaction);
+      await fetchTransactions();
     } catch (err) {
       console.error("Failed to add transaction", err);
     }
@@ -28,7 +26,7 @@ export const useTransactions = () => {
       await $fetch(`/api/transactions/${id}`, {
         method: "DELETE",
       });
-      transactions.value = transactions.value.filter((t) => t.id !== id);
+      await fetchTransactions();
     } catch (err) {
       console.error("Failed to delete transaction", err);
     }

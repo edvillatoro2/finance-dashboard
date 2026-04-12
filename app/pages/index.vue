@@ -18,12 +18,15 @@
           class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6"
         >
           <div>
-            <h1 class="text-lg sm:text-xl font-semibold">My Card</h1>
+            <h1 class="text-lg sm:text-xl font-semibold">
+              {{ user?.name ?? user?.email }}
+            </h1>
             <p class="text-sm text-gray-300">{{ today }}</p>
           </div>
 
           <div class="flex gap-2">
             <button
+              v-if="!user"
               @click="login"
               class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition-colors duration-200"
             >
@@ -131,11 +134,10 @@ const today = ref(new Date().toDateString());
 const { transactions, deleteTransaction, fetchTransactions } =
   useTransactions();
 const { $currency } = useNuxtApp();
-const { clear } = useUserSession();
+const { user, clear } = useUserSession();
 
-await useAsyncData("transactions", async () => {
+onMounted(async () => {
   await fetchTransactions();
-  return true;
 });
 
 const total = computed(() => {

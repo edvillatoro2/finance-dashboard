@@ -16,6 +16,13 @@
 
       <div class="flex flex-col gap-4">
         <input
+          v-if="!isLogin"
+          v-model="name"
+          type="text"
+          placeholder="Full name"
+          class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/50"
+        />
+        <input
           v-model="email"
           type="email"
           placeholder="Email"
@@ -56,6 +63,7 @@ definePageMeta({ auth: false });
 const email = ref("");
 const password = ref("");
 const error = ref("");
+const name = ref("");
 const loading = ref(false);
 const isLogin = ref(true);
 
@@ -69,7 +77,11 @@ const submit = async () => {
     const endpoint = isLogin.value ? "api/auth/login" : "api/auth/register";
     await $fetch(endpoint, {
       method: "POST",
-      body: { email: email.value, password: password.value },
+      body: {
+        email: email.value,
+        password: password.value,
+        ...(!isLogin.value && { name: name.value }),
+      },
     });
 
     await refreshSession();
