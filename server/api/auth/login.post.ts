@@ -20,6 +20,8 @@ export default defineEventHandler(async (event) => {
     throw createError({ status: 400, message: "Invalid credentials" });
   }
 
-  await setUserSession(event, { user: { id: user.id, email: user.email } });
-  return { id: user.id, email: user.email };
+  await setUserSession(event, {
+    user: { id: user.id, email: user.email, name: user.name },
+  });
+  return { id: user.id, email: user.email, name: user.name };
 });

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
 export default defineEventHandler(async (event) => {
-  const { email, password } = await readBody(event);
+  const { email, password, name } = await readBody(event);
 
   if (!email || !password) {
     throw createError({
@@ -16,8 +16,12 @@ export default defineEventHandler(async (event) => {
   }
 
   const hashed = await bcrypt.hash(password, 10);
-  const user = await prisma.user.create({ data: { email, password: hashed } });
+  const user = await prisma.user.create({
+    data: { email, password: hashed, name: name },
+  });
 
-  await setUserSession(event, { user: { id: user.id, email: user.email } });
-  return { id: user.id, email: user.email };
+  await setUserSession(event, {
+    user: { id: user.id, email: user.email, name: user.name },
+  });
+  return { id: user.id, email: user.email, name: user.name };
 });
