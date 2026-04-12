@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-gray-700 via-gray-900 to-black text-white flex justify-center items-center p-4 sm:p-6"
+    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-200 to-blue-500 text-white flex justify-center items-center p-4 sm:p-6"
   >
     <!-- Glass Card Container -->
     <div
@@ -93,7 +93,9 @@
         </div>
 
         <!-- Transactions -->
-        <div class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg">
+        <div
+          class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg max-h-[300px] overflow-y-auto"
+        >
           <div class="flex justify-between items-center mb-4">
             <h2 class="font-semibold">Recent Transactions</h2>
             <NuxtLink
@@ -139,7 +141,7 @@ const total = computed(() => {
 
 const login = () => {
   auth.value = true;
-  navigateTo("/dashboard");
+  navigateTo("/login");
 };
 const logout = () => {
   auth.value = false;
