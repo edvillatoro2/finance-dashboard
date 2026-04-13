@@ -30,10 +30,40 @@
             type="text"
             class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/50"
           />
+
+          <!-- Type Toggle -->
+          <div class="flex rounded-xl overflow-hidden border border-white/20">
+            <button
+              type="button"
+              @click="type = 'income'"
+              :class="[
+                'flex-1 py-3 text-sm font-semibold transition',
+                type === 'income'
+                  ? 'bg-green-500/60 text-white'
+                  : 'bg-white/10 text-white/50 hover:bg-white/20',
+              ]"
+            >
+              ↑ Income
+            </button>
+            <button
+              type="button"
+              @click="type = 'expense'"
+              :class="[
+                'flex-1 py-3 text-sm font-semibold transition',
+                type === 'expense'
+                  ? 'bg-red-500/60 text-white'
+                  : 'bg-white/10 text-white/50 hover:bg-white/20',
+              ]"
+            >
+              ↓ Expense
+            </button>
+          </div>
+
           <input
             v-model.number="amount"
-            placeholder="Amount (negative for expense, e.g. -50)"
+            placeholder="Amount"
             type="number"
+            min="0"
             class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/50"
           />
 
@@ -72,6 +102,7 @@ import { ref } from "vue";
 
 const text = ref("");
 const amount = ref(0);
+const type = ref<"income" | "expense">("income");
 const errorMessage = ref("");
 const successMessage = ref("");
 
@@ -90,10 +121,10 @@ const handleSubmit = async () => {
   successMessage.value = "";
 
   if (!text.value.trim()) {
-    errorMessage.value = "Transaction text is required.";
+    errorMessage.value = "Description is required.";
     return;
   }
-  if (amount.value === 0) {
+  if (!amount.value || amount.value <= 0) {
     errorMessage.value = "Amount cannot be 0";
     return;
   }
@@ -101,13 +132,15 @@ const handleSubmit = async () => {
   loadingSubmit.value = true;
 
   try {
+    const finalAmount = type.value === "expense" ? -amount.value : amount.value;
     await addTransaction({
       text: text.value,
-      amount: amount.value,
+      amount: finalAmount,
     });
     successMessage.value = "Transaction added successfully!";
     text.value = "";
     amount.value = 0;
+    type.value = "income";
   } catch (error) {
     errorMessage.value = "Failed to add transaction.";
   }
