@@ -15,7 +15,7 @@
           to="/"
           class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition text-white text-sm"
         >
-          ← Back
+          Home
         </NuxtLink>
       </div>
 
