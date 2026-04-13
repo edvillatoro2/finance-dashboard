@@ -38,7 +38,9 @@
         </Card>
         <!-- Card 2 -->
         <Card title="map preview">
-          <div class="h-40 bg-gray-100 rounded-xl"></div>
+          <div class="h-40 bg-gray-100 rounded-xl">
+            <TransactionChart :transactions="transactions" />
+          </div>
         </Card>
 
         <!-- Card 3 -->
@@ -72,13 +74,19 @@
 import { ref, computed } from "vue";
 import Card from "@/components/ui/Card.vue";
 import { useTransactions } from "@/composables/useTransactions";
+import TransactionChart from "@/components/TransactionChart.vue";
 
 definePageMeta({
   middleware: "auth",
 });
 
-const { transactions } = useTransactions();
+const { transactions, deleteTransaction, fetchTransactions } =
+  useTransactions();
 const { $currency } = useNuxtApp();
+
+onMounted(async () => {
+  await fetchTransactions();
+});
 
 const total = computed(() => {
   return transactions.value.reduce((sum, t) => sum + t.amount, 0);

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-200 to-blue-500 text-white flex justify-center items-center p-4 sm:p-6"
+    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-400/80 to-blue-600 text-white flex justify-center items-center p-4 sm:p-6"
   >
     <!-- Glass Card Container -->
     <div
@@ -96,7 +96,7 @@
         </div>
 
         <!-- Transactions -->
-        <div
+        <!-- <div
           class="bg-white/10 rounded-2xl p-4 backdrop-blur-lg max-h-[300px] overflow-y-auto"
         >
           <div class="flex justify-between items-center mb-4">
@@ -113,7 +113,7 @@
             :transactions="transactions"
             @delete="deleteTransaction"
           />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
