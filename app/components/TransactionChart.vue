@@ -22,16 +22,16 @@ const props = defineProps<{
   transactions: Transaction[];
 }>();
 
-const sorted = computed(() => {
+const sorted = computed(() =>
   [...props.transactions].sort(
     (a, b) =>
       new Date(a.createdAt ?? 0).getTime() -
       new Date(b.createdAt ?? 0).getTime(),
-  );
-});
+  ),
+);
 
 const chartData = computed(() =>
-  props.transactions.map((t, i) => ({
+  sorted.value.map((t) => ({
     date: t.createdAt ?? "",
     income: t.amount > 0 ? t.amount : 0,
     expense: t.amount < 0 ? Math.abs(t.amount) : 0,
