@@ -1,9 +1,9 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-blue-600 via-pink-200 to-purple-500 flex items-center justify-center p-6"
+    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-300 to-purple-500 flex items-center justify-center p-6"
   >
     <div
-      class="w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white/20"
+      class="w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white"
     >
       <!-- Header -->
       <div class="flex justify-between items-center mb-6 text-white">
@@ -28,11 +28,11 @@
             v-model="text"
             placeholder="Description (e.g. Salary, Coffee)"
             type="text"
-            class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/50"
+            class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/80 border border-white focus:outline-none focus:border-white/50"
           />
 
           <!-- Type Toggle -->
-          <div class="flex rounded-xl overflow-hidden border border-white/20">
+          <div class="flex rounded-xl overflow-hidden border border-white">
             <button
               type="button"
               @click="type = 'income'"
@@ -40,7 +40,7 @@
                 'flex-1 py-3 text-sm font-semibold transition',
                 type === 'income'
                   ? 'bg-green-500/60 text-white'
-                  : 'bg-white/10 text-white/50 hover:bg-white/20',
+                  : 'bg-white/10 text-gray-500 hover:bg-white/20',
               ]"
             >
               ↑ Income
@@ -52,7 +52,7 @@
                 'flex-1 py-3 text-sm font-semibold transition',
                 type === 'expense'
                   ? 'bg-red-500/60 text-white'
-                  : 'bg-white/10 text-white/50 hover:bg-white/20',
+                  : 'bg-white/10 text-gray-500 hover:bg-white/20',
               ]"
             >
               ↓ Expense
@@ -64,7 +64,7 @@
             placeholder="Amount"
             type="number"
             min="0"
-            class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white/20 focus:outline-none focus:border-white/50"
+            class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white focus:outline-none focus:border-white/50"
           />
 
           <p v-if="errorMessage" class="text-red-300 text-sm">
