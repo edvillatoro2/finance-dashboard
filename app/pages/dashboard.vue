@@ -133,7 +133,7 @@
         </Card>
 
         <!-- Card 5 — Largest Transactions -->
-        <Card title="Largest Income">
+        <Card title="Income">
           <div class="space-y-2">
             <div
               v-for="t in largestIncome"
@@ -155,7 +155,7 @@
         </Card>
 
         <!-- Card 6 — Largest Expenses -->
-        <Card title="Largest Expenses">
+        <Card title="Expenses">
           <div class="space-y-2">
             <div
               v-for="t in largestExpenses"
