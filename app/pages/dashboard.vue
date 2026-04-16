@@ -1,28 +1,30 @@
 <template>
   <div class="min-h-screen bg-gray-100 flex">
     <!-- Sidebar -->
-    <aside class="w-20 bg-white shadow flex flex-col items-center py-6 gap-6">
-      <NuxtLink to="/dashboard">
-        <div
-          class="w-12 h-10 bg-black rounded-xl flex items-center justify-center text-white text-xs font-bold"
-        >
-          DB
-        </div>
-      </NuxtLink>
-      <NuxtLink to="/transactions">
-        <div
-          class="w-12 h-10 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-xs"
-        >
-          TX
-        </div>
-      </NuxtLink>
-      <NuxtLink to="/">
-        <div
-          class="w-12 h-10 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-xs"
-        >
-          Home
-        </div>
-      </NuxtLink>
+    <aside class="w-20 bg-white shadow">
+      <div class="sticky top-0 flex flex-col items-center py-6 gap-6">
+        <NuxtLink to="/dashboard">
+          <div
+            class="w-12 h-10 bg-black rounded-xl flex items-center justify-center text-white text-xs font-bold"
+          >
+            DB
+          </div>
+        </NuxtLink>
+        <NuxtLink to="/transactions">
+          <div
+            class="w-12 h-10 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-xs"
+          >
+            TX
+          </div>
+        </NuxtLink>
+        <NuxtLink to="/">
+          <div
+            class="w-12 h-10 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-xs"
+          >
+            Home
+          </div>
+        </NuxtLink>
+      </div>
     </aside>
 
     <!-- Main Content -->

@@ -1,16 +1,13 @@
 <template>
   <div class="w-full">
-    <BarChart
+    <LineChart
       :data="chartData"
-      :height="300"
       :categories="categories"
-      :y-axis="['income', 'expense']"
-      :group-padding="0"
-      :bar-padding="0.2"
-      :radius="4"
-      :y-grid-line="true"
+      :height="300"
       :x-formatter="xFormatter"
-      :legend-position="LegendPosition.TopRight"
+      :y-grid-line="true"
+      :curve-type="CurveType.MonotoneX"
+      :x-num-ticks="4"
       x-label="Date"
       y-label="Amount"
     />

@@ -1,18 +1,26 @@
 <template>
-  <div class="w-full flex flex-col gap-2">
-    <TransitionGroup name="list" tag="ul" class="space-y-2">
-      <TransactionItem
-        v-for="transaction in transactions"
-        :key="transaction.id"
-        :transaction="transaction"
-        @delete="emit('delete', $event)"
-      />
-    </TransitionGroup>
+  <div class="w-full flex flex-col gap-4">
     <div
-      v-if="!transactions?.length"
-      class="font-semibold text-md text-center mt-4 text-red-500"
+      v-if="!transactions.length"
+      class="text-white/50 text-sm text-center py-4"
     >
-      No transactions found.
+      No transactions yet
+    </div>
+    <div v-for="(group, date) in groupedTransactions" :key="date">
+      <!-- date header -->
+      <p
+        class="text-xs text-gray-500 font-semibold capitalize tracking-wide mb-2 px-1"
+      >
+        {{ date }}
+      </p>
+      <ul class="flex flex-col gap-2">
+        <TransactionItem
+          v-for="transaction in group"
+          :key="transaction.id"
+          :transaction="transaction"
+          @delete="emit('delete', $event)"
+        />
+      </ul>
     </div>
   </div>
 </template>
@@ -21,11 +29,32 @@
 import TransactionItem from "@/components/TransactionItem.vue";
 import type { Transaction } from "@/types/transaction";
 
-defineProps<{
+const props = defineProps<{
   transactions: Transaction[];
 }>();
 
 const emit = defineEmits(["delete"]);
+
+const groupedTransactions = computed(() => {
+  const sorted = [...props.transactions].sort(
+    (a, b) =>
+      new Date(a.createdAt ?? 0).getTime() -
+      new Date(b.createdAt ?? 0).getTime(),
+  );
+
+  return sorted.reduce((groups, transaction) => {
+    const date = transaction.createdAt
+      ? new Date(transaction.createdAt).toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+        })
+      : "No Date";
+    if (!groups[date]) groups[date] = [];
+    groups[date].push(transaction);
+    return groups;
+  }, {} as Record<string, Transaction[]>);
+});
 </script>
 
 <style scoped>

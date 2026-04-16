@@ -11,12 +11,20 @@
           <h1 class="text-xl font-semibold">Transactions</h1>
           <p class="text-sm opacity-70">Manage your income & expenses</p>
         </div>
-        <NuxtLink
-          to="/"
-          class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition text-white text-sm"
-        >
-          Home
-        </NuxtLink>
+        <div class="flex gap-4 justify-between">
+          <NuxtLink
+            to="/dashboard"
+            class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition text-white text-sm"
+          >
+            Dashboard
+          </NuxtLink>
+          <NuxtLink
+            to="/"
+            class="bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition text-white text-sm"
+          >
+            Home
+          </NuxtLink>
+        </div>
       </div>
 
       <!-- Add Transaction Form -->
