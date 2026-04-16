@@ -58,7 +58,7 @@
         </div>
 
         <!-- Actions -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
           <NuxtLink
             to="/dashboard"
             class="bg-white/20 p-3 rounded-xl text-center hover:bg-white/30 transition-colors duration-200"
