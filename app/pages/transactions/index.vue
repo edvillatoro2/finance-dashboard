@@ -48,7 +48,7 @@
                 'flex-1 py-3 text-sm font-semibold transition',
                 type === 'income'
                   ? 'bg-green-500/60 text-white'
-                  : 'bg-white/10 text-gray-500 hover:bg-white/20',
+                  : 'bg-white/10 text-slate-500/80 hover:bg-white/20',
               ]"
             >
               ↑ Income
@@ -60,7 +60,7 @@
                 'flex-1 py-3 text-sm font-semibold transition',
                 type === 'expense'
                   ? 'bg-red-500/60 text-white'
-                  : 'bg-white/10 text-gray-500 hover:bg-white/20',
+                  : 'bg-white/10 text-slate-500/80 hover:bg-white/20',
               ]"
             >
               ↓ Expense

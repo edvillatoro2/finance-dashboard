@@ -6,14 +6,18 @@
     >
       No transactions yet
     </div>
-    <div v-for="(group, date) in groupedTransactions" :key="date">
+    <div
+      v-for="(group, date) in groupedTransactions"
+      :key="date"
+      class="border border-gray-200 rounded-lg p-4 bg-white/10 backdrop-blur-sm shadow-sm"
+    >
       <!-- date header -->
       <p
-        class="text-xs text-gray-500 font-semibold capitalize tracking-wide mb-2 px-1"
+        class="text-sm text-white font-bold capitalize text-right tracking-wide mb-2 px-1"
       >
         {{ date }}
       </p>
-      <ul class="flex flex-col gap-2">
+      <ul class="flex flex-col gap-2 mb-14">
         <TransactionItem
           v-for="transaction in group"
           :key="transaction.id"
