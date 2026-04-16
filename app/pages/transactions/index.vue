@@ -75,10 +75,10 @@
             class="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-white/50 border border-white focus:outline-none focus:border-white/50"
           />
 
-          <p v-if="errorMessage" class="text-red-300 text-sm">
+          <p v-if="errorMessage" class="text-red-700/60 text-sm font-bold">
             {{ errorMessage }}
           </p>
-          <p v-if="successMessage" class="text-green-300 text-sm">
+          <p v-if="successMessage" class="text-green-700/60 text-sm font-bold">
             {{ successMessage }}
           </p>
 

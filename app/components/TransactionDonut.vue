@@ -5,7 +5,7 @@
     <DonutChart
       :data="chartData"
       :categories="categories"
-      :height="220"
+      :height="200"
       :radius="80"
       :hide-legend="true"
       :pad-angle="0.1"
