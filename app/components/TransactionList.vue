@@ -42,8 +42,8 @@ const emit = defineEmits(["delete"]);
 const groupedTransactions = computed(() => {
   const sorted = [...props.transactions].sort(
     (a, b) =>
-      new Date(a.createdAt ?? 0).getTime() -
-      new Date(b.createdAt ?? 0).getTime(),
+      new Date(b.createdAt ?? 0).getTime() -
+      new Date(a.createdAt ?? 0).getTime(),
   );
 
   return sorted.reduce((groups, transaction) => {
