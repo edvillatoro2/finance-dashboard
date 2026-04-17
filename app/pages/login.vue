@@ -132,11 +132,6 @@ const toggleMode = () => {
 const submit = async () => {
   error.value = "";
 
-  if (!email.value.includes("@")) {
-    error.value = "Please enter a valid email address.";
-    return;
-  }
-
   if (!isLogin.value) {
     if (!firstName.value.trim() || !lastName.value.trim()) {
       error.value = "First and last name are required.";
@@ -146,6 +141,11 @@ const submit = async () => {
       error.value = "Please meet all password requirements.";
       return;
     }
+  }
+
+  if (!email.value.includes("@")) {
+    error.value = "Please enter a valid email address.";
+    return;
   }
 
   loading.value = true;
