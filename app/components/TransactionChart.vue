@@ -32,7 +32,12 @@ const sorted = computed(() =>
 
 const chartData = computed(() =>
   sorted.value.map((t) => ({
-    date: t.createdAt ?? "",
+    date: t.createdAt
+      ? new Date(t.createdAt).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+        })
+      : null,
     income: t.amount > 0 ? t.amount : 0,
     expense: t.amount < 0 ? Math.abs(t.amount) : 0,
   })),
