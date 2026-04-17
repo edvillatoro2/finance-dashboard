@@ -19,9 +19,8 @@
         >
           <div>
             <h1 class="text-lg sm:text-xl font-semibold">
-              {{ user?.name ? user?.email : "Welcome to FinTrack" }}
+              Welcome to FinTrack
             </h1>
-            <p class="text-sm text-gray-300">{{ today }}</p>
           </div>
 
           <div class="flex gap-2">
@@ -39,7 +38,8 @@
           class="rounded-2xl p-4 sm:p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg mb-6 transition-all duration-1000 hover:bg-gradient-to-l hover:from-indigo-500 hover:via-purple-500 hover:to-pink-600 hover:shadow-2xl"
         >
           <div class="flex justify-between items-center">
-            <div>
+            <span>
+              <!-- card chip -->
               <svg
                 class="w-10 h-8 text-yellow-300"
                 viewBox="0 0 50 40"
@@ -91,8 +91,8 @@
                   fill="rgba(0,0,0,0.15)"
                 />
               </svg>
-            </div>
-            <div>
+            </span>
+            <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="46"
@@ -108,7 +108,7 @@
   0 0,1 0,28.5M3,19a18,17 0 0,1 0,18"
                 />
               </svg>
-            </div>
+            </span>
           </div>
           <p class="text-sm opacity-80">Balance</p>
           <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -116,7 +116,9 @@
           </h2>
 
           <div class="mt-6 flex justify-between text-sm opacity-80">
-            <span>**** 1234</span>
+            <span class="text-sm sm:text-md font-semibold">{{
+              user?.name ?? "Name"
+            }}</span>
             <span>{{ today }}</span>
           </div>
         </div>

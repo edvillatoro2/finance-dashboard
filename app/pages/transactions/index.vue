@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-600/70 to-purple-400 flex items-center justify-center p-6"
+    class="min-h-screen bg-gradient-to-br from-purple-600 via-pink-600/60 to-purple-600 flex items-center justify-center p-6"
   >
     <div
       class="w-full max-w-4xl rounded-3xl p-6 bg-white/10 backdrop-blur-xl shadow-2xl border border-white"
