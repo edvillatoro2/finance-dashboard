@@ -26,8 +26,18 @@
         </div>
       </template>
       <div class="text-center text-white">
-        <div class="font-bold text-lg">{{ $currency(total) }}</div>
-        <div class="text-xs opacity-60 mb-2">Net Balance</div>
+        <div
+          :class="[route.path === '/' ? 'text-white' : 'text-black']"
+          class="font-bold text-lg"
+        >
+          {{ $currency(total) }}
+        </div>
+        <div
+          :class="[route.path === '/' ? 'text-white' : 'text-slate-600']"
+          class="text-xs opacity-60 mb-2"
+        >
+          Net Balance
+        </div>
         <div class="text-xs flex flex-col">
           <span class="text-green-400">↑ {{ $currency(income) }}</span>
           <span class="text-red-400">↓ {{ $currency(expense) }}</span>
@@ -46,6 +56,7 @@ const props = defineProps<{
 }>();
 
 const { $currency } = useNuxtApp();
+const route = useRoute();
 
 const income = computed(() =>
   props.transactions
