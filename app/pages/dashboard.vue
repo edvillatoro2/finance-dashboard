@@ -128,7 +128,7 @@
           </div>
           <NuxtLink
             to="/transactions"
-            class="text-xs text-blue-500 hover:underline mt-3 block text-right"
+            class="text-xs text-blue-500 hover:underline mt-4 block text-right mr-4"
           >
             View all →
           </NuxtLink>

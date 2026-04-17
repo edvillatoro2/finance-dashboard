@@ -8,12 +8,20 @@ export const useTransactions = () => {
     transactions.value = data;
   };
 
-  const addTransaction = async (payload: { text: string; amount: number }) => {
+  const addTransaction = async (payload: {
+    text: string;
+    amount: number;
+    category?: string;
+  }) => {
     try {
       const category = payload.amount > 0 ? "income" : "expense";
       const newTransaction = await $fetch<Transaction>("/api/transactions", {
         method: "POST",
-        body: { text: payload.text, amount: payload.amount, category },
+        body: {
+          text: payload.text,
+          amount: payload.amount,
+          category: payload.category,
+        },
       });
       await fetchTransactions();
     } catch (err) {

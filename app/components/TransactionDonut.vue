@@ -28,9 +28,8 @@
       <div class="text-center text-white">
         <div class="font-bold text-lg">{{ $currency(total) }}</div>
         <div class="text-xs opacity-60 mb-2">Net Balance</div>
-        <div class="text-xs">
+        <div class="text-xs flex flex-col">
           <span class="text-green-400">↑ {{ $currency(income) }}</span>
-          &nbsp;&nbsp;
           <span class="text-red-400">↓ {{ $currency(expense) }}</span>
         </div>
       </div>
