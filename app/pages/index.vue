@@ -19,7 +19,8 @@
         >
           <div>
             <h1 class="text-lg sm:text-xl font-semibold">
-              Welcome to FinTrack
+              Welcome to
+              <span class="header-text lowercase">FinTrack</span>
             </h1>
           </div>
 
@@ -168,7 +169,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { useTransactions } from "@/composables/useTransactions";
-import TransactionList from "@/components/TransactionList.vue";
 import TransactionChart from "@/components/TransactionChart.vue";
 import TransactionDonut from "@/components/TransactionDonut.vue";
 import AnimatedNumber from "@/components/ui/AnimateNumber.vue";
@@ -194,4 +194,12 @@ const logout = async () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.header-text {
+  font-family: "Unbounded", sans-serif;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: clamp(3rem, 4vw, 6rem);
+}
+</style>
